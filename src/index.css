@@ -1,13 +1,20 @@
+@charset "utf-8";
+
+/* basic css */
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: '나눔고딕', NanumGothic, Dotum, '돋움', sans-serif;
+  background-color: aliceblue;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body, ul, ol, li, div, a, p, table, tr, td, input, select, textarea, h1 {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
 }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
