@@ -1,5 +1,5 @@
 import React from "react";
-import "./Nav.css"
+import "./css/Nav.css"
 
 const NavContainer = ({ groupList }) => {
     return (

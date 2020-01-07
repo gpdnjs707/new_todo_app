@@ -1,0 +1,8 @@
+.todoItemContainer {
+    width: 100%;
+    height: 35px;
+    background-color: #e2e2e2;
+    border-radius: 5px;
+    color: black;
+    font-size: 12px;
+}

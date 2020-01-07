@@ -1,17 +1,18 @@
 import React from "react";
-import "./Form.css";
+import "./css/Form.css";
 
 const Form = ({ value, onChange, onKeypress, onClick }) => {
     return (
         <div className="formContainer">
-            <input className="todoInput"
-                value = { value }
-                onChange = { onChange }
-                onKeypress = { onKeypress }
-                placeholder = "할일을 입력하세요."
+            <input 
+                className="form-control"
+                value={ value }
+                onChange={ onChange }
+                onKeyPress={ onKeypress }
+                placeholder="할일을 입력하세요."
             />
-            <button className="addTodoBtn">
-                추가
+            <button className="btn btn-primary">
+                +
             </button>
         </div>
     );
