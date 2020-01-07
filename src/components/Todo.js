@@ -1,15 +1,15 @@
 import React from "react";
 import "./css/Todo.css";
 
-const TodoContainer = ({form, groupName, todoList, doneList}) => {
+const TodoContainer = ({groupName, form, children}) => {
     return (
         <main className="todoContainer">
-            <span className="groupName">그룹명{ groupName }</span>
+            <span className="groupName">그룹명{groupName}</span>
             <section className="todoFormContainer">
                 { form }
             </section>
             <section className="todoListContainer">
-                { todoList }
+                {children}
             </section>
         </main>
     );
