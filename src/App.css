@@ -8,3 +8,7 @@
     display: flex;
     overflow: hidden;
 }
+
+.todoWrap {
+    width: 70%;
+}

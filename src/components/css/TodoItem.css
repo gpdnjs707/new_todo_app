@@ -1,11 +1,33 @@
 .todoItemContainer {
     width: 100%;
     height: 35px;
-    background-color: #e2e2e2;
-    border-radius: 5px;
+    border-bottom: #e2e2e2;
     color: black;
     font-size: 12px;
     margin: 5px 0;
     line-height: 35px;
     padding: 2px;
+    display: flex;
+}
+
+.todoItemText {
+    flex: 2;
+}
+
+.todoItemText.isDone {
+    text-decoration: line-through;
+}
+
+.input-group-text {
+    border: none;
+    background-color: transparent;
+}
+
+.removeBtn {
+    margin-right: 5px;
+    display: none;
+}
+
+.todoItemContainer:hover .removeBtn {
+    display: inline;
 }
