@@ -26,6 +26,24 @@ class App extends Component {
     });
   }
 
+  handleInputUpdate = (id, e) => {
+    const {todos} = this.state;
+
+    const index = todos.findIndex(item => item.id == id);
+    const selected = todos[index]
+    const updatedInput = e.target.value;
+
+    const updatedTodo = [...todos]
+    updatedTodo[index] = {
+      ...selected,
+      text: updatedInput
+    }
+
+    this.setState({
+      todos: updatedTodo
+    })
+  }
+
   handleInputInsert = () => {
     const {input, todos} = this.state
 
@@ -66,13 +84,24 @@ class App extends Component {
     })
   }
 
+  handleRemove = (id) => {
+    const {todos} = this.state;
+
+    this.setState({
+      todos: todos.filter(item => item.id != id)
+    })
+
+  }
+
   render() {
     const {input, todos} = this.state;
     const {
       handleInputChange,
       handleInputInsert,
       handleKeyPress,
-      handleToggle
+      handleToggle,
+      handleRemove,
+      handleInputUpdate
     } = this;
 
     return (
@@ -87,10 +116,10 @@ class App extends Component {
               onInsert={handleInputInsert}
             />
             )}>
-              <TodoItemList todos={todos} onToggle={handleToggle} />
+              <TodoItemList todos={todos} onToggle={handleToggle} onRemove={handleRemove} onChange={handleInputUpdate}/>
           </TodoListContainer>
           <DoneListContainer>
-            <DoneItemList todos={todos} onToggle={handleToggle} />
+            <DoneItemList todos={todos} onToggle={handleToggle} onRemove={handleRemove} onChange={handleInputUpdate}/>
           </DoneListContainer>
         </div>
        

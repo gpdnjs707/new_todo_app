@@ -7,19 +7,20 @@ import "./css/TodoItem.css";
 class TodoItem extends Component {
     
     render() {
-        const {id, text, isDone, onToggle, onRemove} = this.props;
+        const {id, text, isDone, onToggle, onRemove, onChange} = this.props;
 
         return (
             <div className="todoItemContainer">
                 <div className="input-group-text">
                     {/* onClick={onToggle{id}}로 하면 렌더링 될 때 바로 실행됨! */}
-                    <input type="checkbox" onClick={() => onToggle(id)}/>
+                    <input type="checkbox" checked={isDone} onClick={() => onToggle(id)} readOnly/>
                 </div>
                 <div className={classNames("todoItemText", {isDone})}>
-                    <div>{text}</div>
+                    <input value={text} onChange={(e) => onChange(id, e)}/>
+                    {/* <div>{text}</div> */}
                 </div>
-                <div className="removeBtn">
-                    삭제
+                <div className="removeBtn" onClick={() => onRemove(id)}>
+                    X
                 </div>
             </div>
         );

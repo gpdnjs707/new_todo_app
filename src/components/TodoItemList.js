@@ -5,7 +5,7 @@ import TodoItem from "./TodoItem";
 class TodoItemList extends Component {
 
     render() {
-        const { todos, onToggle, onRemove } = this.props;
+        const { todos, onToggle, onRemove, onChange } = this.props;
 
         const beTodo = todos.filter(item => item.isDone == false)
 
@@ -17,6 +17,8 @@ class TodoItemList extends Component {
                     text={text}
                     isDone={isDone}
                     onToggle={onToggle}
+                    onRemove={onRemove}
+                    onChange={onChange}
                     key={id}
                 />
             )

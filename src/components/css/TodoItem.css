@@ -14,6 +14,13 @@
     flex: 2;
 }
 
+.todoItemText input {
+    border-style: none;
+}
+.todoItemText input:focus {
+   outline: none;
+}
+
 .todoItemText.isDone {
     text-decoration: line-through;
 }
@@ -24,8 +31,11 @@
 }
 
 .removeBtn {
-    margin-right: 5px;
+    margin-right: 10px;
     display: none;
+    cursor: pointer;
+    color: #F44336;
+    font-weight: 600;
 }
 
 .todoItemContainer:hover .removeBtn {
