@@ -1,15 +1,16 @@
 import React from "react";
 import "./css/Nav.css"
 
-const NavContainer = ({ groupList }) => {
+const NavContainer = ({ children }) => {
     return (
         <div className="navContainer">
-            <div className="doneGroup">
-                던
-            </div>
             <div className="groupList">
-
+                {children}
             </div>
+            <div className="doneGroup">
+                
+            </div>
+            <button className="groupAddBtn">+</button>
         </div>
     );
 }

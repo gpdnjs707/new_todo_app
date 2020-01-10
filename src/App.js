@@ -1,22 +1,23 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import TodoListContainer from './components/TodoContainer';
 import DoneListContainer from "./components/DoneTodoContainer";
-import NavContainer from './components/Nav';
+import NavContainer from './components/Nav copy';
 import Form from "./components/Form";
 import TodoItemList from "./components/TodoItemList";
 import "./App.css";
 import DoneItemList from './components/DoneItemList';
+import GroupList from './components/GroupList';
 
 
 class App extends Component {
   
-  id = 2;
+  todoId = 2;
 
   state = {
     input: '',
     todos: [
-      {id: 0, text: "Make todo App", isDone: false},
-      {id: 1, text: "Make todo App done", isDone: true}
+      {todoId: 0, text: "Make todo App", isDone: false},
+      {todoId: 1, text: "Make todo App done", isDone: true}
     ]
   }
 
@@ -29,7 +30,7 @@ class App extends Component {
   handleInputUpdate = (id, e) => {
     const {todos} = this.state;
 
-    const index = todos.findIndex(item => item.id == id);
+    const index = todos.findIndex(item => item.todoId === id);
     const selected = todos[index]
     const updatedInput = e.target.value;
 
@@ -50,7 +51,7 @@ class App extends Component {
     this.setState({
       input: '',
       todos: todos.concat({
-        id: this.id++,
+        todoId: this.todoId++,
         text: input,
         isDone: false
       })  
@@ -68,7 +69,7 @@ class App extends Component {
     const {todos} = this.state;
     
     //1. 선택된 todoItem의 Index 정보 가져오기
-    const index = todos.findIndex(item => item.id == id)
+    const index = todos.findIndex(item => item.todoId === id)
     //2. 선택된 arr[index] 값 할당
     const selected = todos[index] // -> {id:1, text:..., idDone: false}
     //3. todos arr 복사
@@ -88,10 +89,12 @@ class App extends Component {
     const {todos} = this.state;
 
     this.setState({
-      todos: todos.filter(item => item.id != id)
+      todos: todos.filter(item => item.todoId !== id)
     })
 
   }
+
+  
 
   render() {
     const {input, todos} = this.state;
@@ -106,7 +109,7 @@ class App extends Component {
 
     return (
       <div className="wrap">
-        <NavContainer></NavContainer>
+        <NavContainer />
         <div className="todoWrap">
           <TodoListContainer form={(
             <Form 

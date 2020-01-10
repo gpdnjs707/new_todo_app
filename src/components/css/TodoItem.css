@@ -1,12 +1,11 @@
 .todoItemContainer {
     width: 100%;
-    height: 35px;
+    height: 40px;
     border-bottom: #e2e2e2;
     color: black;
     font-size: 12px;
     margin: 5px 0;
-    line-height: 35px;
-    padding: 2px;
+    line-height: 40px;
     display: flex;
 }
 
@@ -16,13 +15,15 @@
 
 .todoItemText input {
     border-style: none;
+    background-color: transparent;
 }
 .todoItemText input:focus {
    outline: none;
 }
 
-.todoItemText.isDone {
+.todoItemText.isDone input{
     text-decoration: line-through;
+    color: #e2e2e2;
 }
 
 .input-group-text {
@@ -40,4 +41,7 @@
 
 .todoItemContainer:hover .removeBtn {
     display: inline;
+}
+.todoItemContainer:hover {
+    background-color: whitesmoke;
 }

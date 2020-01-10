@@ -6,18 +6,18 @@ class DoneItemList extends Component {
 
     render() {
         const { todos, onToggle, onRemove, onChange } = this.props;
-        const DoneTodo = todos.filter(item => item.isDone == true)
+        const DoneTodo = todos.filter(item => item.isDone === true)
         const todoList = DoneTodo.map(
             //비구조화 할당. 파라미터는 1개이다
-            ({id, text, isDone}) => (
+            ({todoId, text, isDone}) => (
                 <TodoItem 
-                    id={id}
+                    id={todoId}
                     text={text}
                     isDone={isDone}
                     onToggle={onToggle}
                     onRemove={onRemove}
                     onChange={onChange}
-                    key={id}
+                    key={todoId}
                 />
             )
         );
