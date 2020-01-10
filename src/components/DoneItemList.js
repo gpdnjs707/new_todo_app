@@ -5,8 +5,11 @@ import TodoItem from "./TodoItem";
 class DoneItemList extends Component {
 
     render() {
-        const { todos, onToggle, onRemove, onChange } = this.props;
-        const DoneTodo = todos.filter(item => item.isDone === true)
+        const { todos, onToggle, onRemove, onChange, groups, selected } = this.props;
+        const groupTitle = groups[selected].title;
+        const groupMatch = todos.filter(item => item.groupTitle === groupTitle)
+
+        const DoneTodo = groupMatch.filter(item => item.isDone === true)
         const todoList = DoneTodo.map(
             //비구조화 할당. 파라미터는 1개이다
             ({todoId, text, isDone}) => (

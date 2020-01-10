@@ -3,11 +3,14 @@ import GroupItem from "./GroupItem"
 
 class GroupList extends Component {
     render() {
-        const {groups} = this.props
-        const groupList = groups.map(({id, title}) => 
+        const {selectedId, onSelect, groups} = this.props
+        const groupList = groups.map(({groupId, title}) => 
             <GroupItem 
-                groupId={id}
+                groupId={groupId}
                 title={title}
+                onSelect={onSelect}
+                key={groupId}
+                active={groupId === selectedId}
             />
         )
         return (

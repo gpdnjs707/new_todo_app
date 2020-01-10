@@ -12,18 +12,18 @@ import AddGroupPopup from './components/AddGroup';
 
 class App extends Component {
   
-  todoId = 2;
+  todoId = 1;
   groupId = 1;
 
   state = {
     input: '',
     popupInput: '',
+    selectedId: 0,
     todos: [
-      {todoId: 0, text: "Make todo App", isDone: false},
-      {todoId: 1, text: "Make todo App done", isDone: true}
+      {todoId: 0, text: "Make todo App", isDone: false, groupTitle:"Inbox"},
     ],
     groups: [
-      {groupId: 0, title: "Inbox"}
+      {groupId: 0, title: "Inbox"},
     ],
     popupDisplay: false
   }
@@ -53,14 +53,16 @@ class App extends Component {
   }
 
   handleInputInsert = () => {
-    const {input, todos} = this.state
+    const {input, todos, groups, selectedId} = this.state
+    const groupTitle = groups[selectedId].title
 
     this.setState({
       input: '',
       todos: todos.concat({
         todoId: this.todoId++,
         text: input,
-        isDone: false
+        isDone: false,
+        groupTitle: groupTitle
       })  
     });
   }
@@ -126,20 +128,28 @@ class App extends Component {
   handlePopupInsert = () => {
     const {popupInput, groups} = this.state;
 
-    this.setState({
-      popupInput: '',
-      groups: groups.concat({
-        groupId: this.groupId++,
-        title: popupInput
+    if(popupInput !== '') {
+      this.setState({
+        popupInput: '',
+        groups: groups.concat({
+          groupId: this.groupId++,
+          title: popupInput
+        })
       })
+  
+      this.handlePopupClose()
+    }
+  }
+
+  handleSelectedGroup = (id) => {
+    const {groups} = this.state;
+    this.setState({
+      selectedId: groups[id].groupId
     })
-
-    this.handlePopupClose()
-
   }
 
   render() {
-    const {input, popupInput, todos, groups, popupDisplay} = this.state;
+    const {input, popupInput, todos, groups, popupDisplay, selectedId} = this.state;
     const {
       handleInputChange,
       handleInputInsert,
@@ -150,7 +160,8 @@ class App extends Component {
       handlePopup,
       handlePopupInsert,
       handlePopupInput,
-      handlePopupClose
+      handlePopupClose,
+      handleSelectedGroup
     } = this;
 
     return (
@@ -165,21 +176,28 @@ class App extends Component {
           />
         </ModalPortal>
 
-        <NavContainer groups={groups} onClick={handlePopup}/>
+        <NavContainer selected={handleSelectedGroup} groups={groups} onClick={handlePopup} selectedId={selectedId}/>
 
         <div className="todoWrap">
-          <TodoListContainer form={(
+          <TodoListContainer 
+          form={(
             <Form 
               value={input}
               onKeyPress={handleKeyPress}
               onChange={handleInputChange}
               onInsert={handleInputInsert}
             />
-            )}>
-              <TodoItemList todos={todos} onToggle={handleToggle} onRemove={handleRemove} onChange={handleInputUpdate}/>
+            )} 
+            groups={groups} 
+            selected={selectedId}>
+              <TodoItemList 
+                todos={todos} onToggle={handleToggle} onRemove={handleRemove} onChange={handleInputUpdate} groups={groups} selected={selectedId}
+              />
           </TodoListContainer>
           <DoneListContainer>
-            <DoneItemList todos={todos} onToggle={handleToggle} onRemove={handleRemove} onChange={handleInputUpdate}/>
+            <DoneItemList 
+              todos={todos} onToggle={handleToggle} onRemove={handleRemove} onChange={handleInputUpdate} groups={groups} selected={selectedId}
+            />
           </DoneListContainer>
         </div>
        

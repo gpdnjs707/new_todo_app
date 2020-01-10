@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import "./css/GroupItem.css"
+import "./css/GroupItem.css";
+import classNames from "classnames";
 
 class GroupItem extends Component {
     render() {
-        const { id, onClick, title } = this.props;
+        const { groupId, onSelect, title, active } = this.props;
         return (
-            <div className="groupItemContainer" onClick={() => onClick()}>
+            <div className={classNames("groupItemContainer", {active})} onClick={() => onSelect(groupId)}>
                 <div className="groupTitle">
                     {title}
                 </div>

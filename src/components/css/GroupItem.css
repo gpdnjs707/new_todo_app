@@ -5,5 +5,9 @@
 }
 
 .groupItemContainer:hover {
-    background-color: turquoise;
+    background-color: rgb(228, 236, 252);
+}
+.groupItemContainer.active {
+    background-color: rgb(228, 236, 252);
+    font-weight: bold;
 }
