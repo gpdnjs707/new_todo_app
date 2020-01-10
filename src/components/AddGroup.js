@@ -3,13 +3,13 @@ import classNames from "classnames";
 
 class AddGroupPopup extends Component {
     render() {
-        const {id, title, onChange, onCreate, display} = this.props;
+        const {id, text, onChange, onCreate, display, dismiss} = this.props;
         return (
             <div className={classNames("addGroupPopupContainer", {display})}>
-                <div className="closeBtn">x</div>
+                <div className="closeBtn" onClick={() => dismiss()}>x</div>
                 <p>그룹 추가</p>
-                <input />
-                <button className="btn btn-primary" >Save</button>
+                <input value={text} onChange={(e) => onChange(e)}/>
+                <button className="btn btn-primary" onClick={(e) => onCreate(e)}>Save</button>
 
             </div>
         )

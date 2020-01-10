@@ -6,7 +6,7 @@ class GroupList extends Component {
         const {groups} = this.props
         const groupList = groups.map(({id, title}) => 
             <GroupItem 
-                id={id}
+                groupId={id}
                 title={title}
             />
         )

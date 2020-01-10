@@ -6,19 +6,26 @@ import Form from "./components/Form";
 import TodoItemList from "./components/TodoItemList";
 import "./App.css";
 import DoneItemList from './components/DoneItemList';
-import GroupList from './components/GroupList';
+import ModalPortal from './ModalPortal';
+import AddGroupPopup from './components/AddGroup';
 
 
 class App extends Component {
   
   todoId = 2;
+  groupId = 1;
 
   state = {
     input: '',
+    popupInput: '',
     todos: [
       {todoId: 0, text: "Make todo App", isDone: false},
       {todoId: 1, text: "Make todo App done", isDone: true}
-    ]
+    ],
+    groups: [
+      {groupId: 0, title: "Inbox"}
+    ],
+    popupDisplay: false
   }
 
   handleInputChange = (e) => {
@@ -94,22 +101,72 @@ class App extends Component {
 
   }
 
+  handlePopup = () => {
+    const {popupDisplay} = this.state;
+
+    this.setState({
+        popupDisplay: !popupDisplay
+        }   
+    )
+  }
+
+  handlePopupClose = () => {
+    const {popupDisplay} = this.state;
+    this.setState({
+      popupDisplay: !popupDisplay
+    })
+  }
+
+  handlePopupInput = (e) => {
+    this.setState({
+      popupInput: e.target.value
+    })
+  }
   
+  handlePopupInsert = () => {
+    const {popupInput, groups} = this.state;
+
+    this.setState({
+      popupInput: '',
+      groups: groups.concat({
+        groupId: this.groupId++,
+        title: popupInput
+      })
+    })
+
+    this.handlePopupClose()
+
+  }
 
   render() {
-    const {input, todos} = this.state;
+    const {input, popupInput, todos, groups, popupDisplay} = this.state;
     const {
       handleInputChange,
       handleInputInsert,
       handleKeyPress,
       handleToggle,
       handleRemove,
-      handleInputUpdate
+      handleInputUpdate,
+      handlePopup,
+      handlePopupInsert,
+      handlePopupInput,
+      handlePopupClose
     } = this;
 
     return (
       <div className="wrap">
-        <NavContainer />
+        <ModalPortal>
+          <AddGroupPopup
+            text={popupInput} 
+            display={popupDisplay} 
+            onCreate={handlePopupInsert}
+            onChange={handlePopupInput}
+            dismiss={handlePopupClose}
+          />
+        </ModalPortal>
+
+        <NavContainer groups={groups} onClick={handlePopup}/>
+
         <div className="todoWrap">
           <TodoListContainer form={(
             <Form 
